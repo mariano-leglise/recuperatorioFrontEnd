@@ -1,16 +1,21 @@
 <script setup lang="ts">
 // importar reactive
 // importart useThemeStore
+import { reactive } from 'vue';
+import { useThemeStore } from './stores/themeStore'
+
 
 // iconos
-import { useThemeStore } from './stores/themeStore' // Importa el store
+
 import { MoonIcon, SunIcon, LinkIcon } from '@heroicons/vue/24/solid'
 
 // instanciar useThemeStore
+const themeStore = useThemeStore();
 // crear variable reactiva con objeto useStore
+const theme = reactive(themeStore);
 
 
-const themeStore = useThemeStore()
+
 </script>
 
 <template>
@@ -21,14 +26,17 @@ const themeStore = useThemeStore()
         <label for="toggle" class="flex items-center justify-center cursor-pointer">
           <div class="relative">
             <!-- usar directiva @click para ejecutar el metodo para cambiar de dark a light o viceversa -->
-            <input type="checkbox" id="toggle" class="sr-only"/>
-            <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+            <input type="checkbox" id="toggle" class="sr-only" />
+            <div class="block bg-gray-600 w-14 h-8 rounded-full" @click="theme.toggleTheme"></div>
+
             <div
               class="dot absolute left-1 top-1 bg-black w-6 h-6 flex items-center justify-center rounded-full transition">
               <!-- usar directiva v-if  para mostrar el icono de luna o sol usando isDark como referencia -->
-              <MoonIcon class="w-4 h-4 text-white" />
-              <SunIcon class="w-full h-full text-yellow-500 p-1" />
-            </div>
+
+              <MoonIcon v-if="!theme.isDark" class="w-4 h-4 text-white" />
+
+              <SunIcon v-if="theme.isDark" class="w-full h-full text-yellow-500 p-1" />
+  </div>
           </div>
 
           <!-- cambiar usar v-bind:class y atributo mode del ThemeState para cambiar el texto -->
