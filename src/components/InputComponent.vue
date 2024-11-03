@@ -45,7 +45,11 @@ function makeItComplete() {
 function saveTask() {
     const newTaskWithId: Task = {
         ...reactiveTask,
+<<<<<<< HEAD
         id: taskStore.data.length + 1 
+=======
+        id: taskStore.data.length + 1
+>>>>>>> ee4885c8d4e13251ced191c6ee6eb9f886ca83a5
     };
     taskStore.addTask(newTaskWithId);
     reactiveTask.tarea = ''; // deja vacio el campo despues de cargar una "tarea"
